@@ -1,51 +1,54 @@
 {
-  "name": "mdgt-js",
-  "version": "0.0.0",
-  "description": "A microdata-parsing microservice",
-  "license": "MIT",
-  "repository": "https://github.com/jjcamp/mdgt-js",
-  "author": "John J. Camp",
-  "keywords": [
-    "microdata",
-    "microservice",
-    "html",
-    "parser"
-  ],
-  "files": [
-    "lib"
-  ],
-  "main": "lib/app.js",
-  "typings": "lib/app.d.ts",
-  "scripts": {
-    "clean": "rimraf lib",
-    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "build": "npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
-    "test": "npm run build && mocha --opts mocha.opts",
-    "debug": "npm run build && node --debug .",
-    "debug:test": "npm run test -- --debug",
-    "watch": "npm run build -- --watch",
-    "watch:test": "npm run test -- --watch"
-  },
-  "dependencies": {
-    "parse5": "^3.0.0",
-    "xmldom": "^0.1.27",
-    "xmlserializer": "^0.6.0",
-    "xpath": "0.0.23"
-  },
-  "devDependencies": {
-    "@types/chai": "3.4.34",
-    "@types/mocha": "2.2.33",
-    "@types/node": "0.0.2",
-    "@types/xmldom": "^0.1.28",
-    "chai": "^3.5.0",
-    "commander": "^2.9.0",
-    "mocha": "^3.0.1",
-    "rimraf": "^2.5.4",
-    "ts-node": "^1.2.2",
-    "tslint": "^4.0.2",
-    "typescript": "2.0.10"
-  },
-  "engines": {
-    "node": ">=4.0.0"
-  }
+    "name": "mdgt-js",
+    "version": "0.0.0",
+    "description": "A microdata-parsing microservice",
+    "license": "MIT",
+    "repository": "https://github.com/jjcamp/mdgt-js",
+    "author": "John J. Camp",
+    "keywords": [
+        "microdata",
+        "microservice",
+        "html",
+        "parser"
+    ],
+    "files": [
+	    "lib"
+    ],
+    "main": "lib/app.js",
+    "typings": "lib/app.d.ts",
+    "bin": {
+        "mdgt": "./lib/app.js"
+    },
+    "scripts": {
+        "clean": "rimraf lib",
+        "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+        "build": "npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+        "test": "npm run build && mocha --opts mocha.opts",
+        "debug": "npm run build && node --debug .",
+        "debug:test": "npm run test -- --debug",
+        "watch": "npm run build -- --watch",
+        "watch:test": "npm run test -- --watch"
+    },
+    "dependencies": {
+        "parse5": "^3.0.0",
+        "xmldom": "^0.1.27",
+        "xmlserializer": "^0.6.0",
+        "xpath": "0.0.23"
+    },
+    "devDependencies": {
+        "@types/chai": "3.4.34",
+        "@types/mocha": "2.2.33",
+        "@types/node": "0.0.2",
+        "@types/xmldom": "^0.1.28",
+        "chai": "^3.5.0",
+        "commander": "^2.9.0",
+        "mocha": "^3.0.1",
+        "rimraf": "^2.5.4",
+        "ts-node": "^1.2.2",
+        "tslint": "^4.0.2",
+        "typescript": "2.0.10"
+    },
+    "engines": {
+        "node": ">=4.0.0"
+    }
 }
