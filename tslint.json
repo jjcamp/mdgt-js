@@ -9,6 +9,8 @@
         "one-line": [ true, "check-open-brace" ],
         // Although discouraged, can be sensible
         "max-classes-per-file": [ false ],
+        // Typecasts should NOT have trailing whitespace
+        "whitespace": [true, "check-branch", "check-decl", "check-module", "check-operator", "check-separator", "check-type"],
         // turn back on once rule no longer mixes internal and external imports
         "ordered-imports": [ false ]
     }
