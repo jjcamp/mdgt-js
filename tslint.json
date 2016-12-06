@@ -1,0 +1,15 @@
+{
+    "extends": "tslint:latest",
+    "rules": {
+        // Single-line braces are allowed but not required
+        "curly": false,
+        // Never use trailing commas
+        "trailing-comma": [ true, { "multiline": "never", "singleline": "never" } ],
+        // K&R-style braces
+        "one-line": [ true, "check-open-brace" ],
+        // Although discouraged, can be sensible
+        "max-classes-per-file": [ false ],
+        // turn back on once rule no longer mixes internal and external imports
+        "ordered-imports": [ false ]
+    }
+}
