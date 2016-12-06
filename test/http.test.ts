@@ -1,3 +1,4 @@
+/// <reference path="../node_modules/@types/node/index.d.ts" />
 import { Http } from "../src/http";
 import * as chai from "chai";
 import "mocha";
