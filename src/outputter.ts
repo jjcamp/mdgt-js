@@ -5,7 +5,21 @@ export interface IOutputter {
     writeList: (list: string[], header?: string, footer?: string) => void;
 }
 
-export class ConsoleOutputter {
+export class OutputterLocator {
+    private table = new Map<string, () => IOutputter>();
+
+    constructor() {
+        this.table.set("console", () => new ConsoleOutputter());
+    }
+
+    public get(name: string): IOutputter {
+        if (!this.table.has(name))
+            throw Error(`Outputter ${name} not found`);
+        return this.table.get(name)();
+    }
+}
+
+export class ConsoleOutputter implements IOutputter {
     private con: Console;
     private bullet: string;
 

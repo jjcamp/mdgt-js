@@ -1,4 +1,4 @@
-import { ConsoleOutputter, IOutputter } from "../src/outputter";
+import { ConsoleOutputter, IOutputter, OutputterLocator } from "../src/outputter";
 import { Writable } from "stream";
 import * as chai from "chai";
 import "mocha";
@@ -18,6 +18,17 @@ class TestWriter extends Writable {
         callback(err);
     }
 }
+
+describe("OutputterLocator", () => {
+    it("should throw on invalid outputter", () => {
+        const out = (new OutputterLocator()).get("console");
+        assert.isTrue(out instanceof ConsoleOutputter);
+    });
+
+    it("should not find an outputter", () => {
+        assert.throws(() => (new OutputterLocator()).get("doesn't exist"));
+    });
+});
 
 describe("ConsoleOutputter", () => {
     it("#writeFormatted()", () => {
