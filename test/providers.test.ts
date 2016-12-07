@@ -32,18 +32,23 @@ describe("providers", () => {
             assert.equal(e, `${existingFile} is not a valid directory`);
         }
     });
-});
-
-describe("provider", () => {
-    it("should give test provider path", () => {
-        const providers = new Providers(testProvPath);
-        const test = providers.find("test");
-        assert.equal(test.path, "./test/providers/test.json");
-    });
 
     it("should return null for absent provider", () => {
         const providers = new Providers(testProvPath);
         const noExist = providers.find("non-existant");
         assert.isNull(noExist);
+    });
+});
+
+describe("JsonProvider", () => {
+    it("#name & #path", () => {
+        const test = (new Providers(testProvPath).find("test"));
+        assert.equal(test.name, "test");
+        assert.equal(test.path, testProvPath + "/test.json");
+    });
+
+    it("#read()", () => {
+        const test = (new Providers(testProvPath).find("test"));
+        assert.equal(test.read().search.uriRoot, "https://en.wikipedia.org");
     });
 });

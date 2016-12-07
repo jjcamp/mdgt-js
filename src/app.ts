@@ -18,8 +18,8 @@ function main(args: string[]): number {
         .onParse((fmt, providerType, query) => {
             const providers = new Providers("./providers");
             const provider = providers.find(providerType);
-            const parser = new Parser(provider);
-            parser.scrape(query, (data) => {
+            const parser = new Parser(provider.read());
+            parser.scrape(query, (data: any) => {
                 const out = (new OutputterLocator()).get(cmd.outputType);
                 out.writeFormatted(fmt.format(data));
             });

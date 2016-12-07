@@ -2,16 +2,14 @@ import { html2xml } from "./html2xml";
 import { Http } from "./http";
 import { IItemData, IProviderData } from "./iproviderdata";
 import { IProvider } from "./providers";
-import * as fs from "fs";
 // tslint:disable-next-line: no-var-requires
 const xpath = require("xpath");
 
 export class Parser {
     private provider: IProviderData;
 
-    constructor(provider: IProvider) {
-        const fileData = fs.readFileSync(provider.path);
-        this.provider = JSON.parse(fileData.toString());
+    constructor(providerData: IProviderData) {
+        this.provider = providerData;
     }
 
     public scrape(query: string, callback: (data: any) => void): void {
