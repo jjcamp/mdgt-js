@@ -9,7 +9,7 @@ export class JsonFormatter implements IFormatter {
 }
 
 /* tslint:disable: forin */
-export class ConsoleFormatter implements IFormatter {
+export class TextFormatter implements IFormatter {
     public format(obj: any): string {
         let result: string[] = [];
         let pad = 0;

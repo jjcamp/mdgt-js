@@ -1,4 +1,4 @@
-import { ConsoleFormatter, IFormatter, JsonFormatter } from "../src/formatter";
+import { TextFormatter, IFormatter, JsonFormatter } from "../src/formatter";
 import * as chai from "chai";
 import "mocha";
 
@@ -14,10 +14,10 @@ describe("JsonFormatter", () => {
     });
 });
 
-describe("ConsoleFormatter", () => {
-    it("should format to console", () => {
+describe("TextFormatter", () => {
+    it("should format to text", () => {
         const testObj = { a: "asd", bc: [ "asd", "asd" ]};
-        const fmt: IFormatter = new ConsoleFormatter();
+        const fmt: IFormatter = new TextFormatter();
         const actOutput = fmt.format(testObj);
         const expOutput = "a:  asd\nbc: asd\n    asd";
         assert.equal(actOutput, expOutput);
