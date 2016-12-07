@@ -1,7 +1,7 @@
 import { html2xml } from "./html2xml";
 import { Http } from "./http";
 import { IItemData, IProviderData } from "./iproviderdata";
-import { IProvider } from "./providers";
+import { IProvider } from "./provider";
 // tslint:disable-next-line: no-var-requires
 const xpath = require("xpath");
 

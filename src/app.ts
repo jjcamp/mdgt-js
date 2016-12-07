@@ -3,7 +3,7 @@ import { Cmd } from "./cmd";
 import { IFormatter } from "./formatter";
 import { OutputterLocator } from "./outputter";
 import { Parser } from "./parser";
-import { Providers } from "./providers";
+import { ProviderLocator } from "./providerlocator";
 
 process.exitCode = main(process.argv);
 
@@ -12,11 +12,11 @@ function main(args: string[]): number {
     cmd
         .onProviderList(() => {
             const out = (new OutputterLocator()).get(cmd.outputType);
-            const providers = new Providers("./providers");
+            const providers = new ProviderLocator("./providers");
             out.writeList(providers.list(), "Available providers:");
         })
         .onParse((fmt, providerType, query) => {
-            const providers = new Providers("./providers");
+            const providers = new ProviderLocator("./providers");
             const provider = providers.find(providerType);
             const parser = new Parser(provider.read());
             parser.scrape(query, (data: any) => {
