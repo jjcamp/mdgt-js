@@ -1,21 +1,31 @@
 #!/usr/bin/env node
-import { ConsoleFormatter } from "./formatter";
+import { Cmd } from "./cmd";
+import { TextFormatter } from "./formatter";
+import { ConsoleOutputter, OutputterLocator } from "./outputter";
 import { Parser } from "./parser";
 import { Providers } from "./providers";
 
 process.exitCode = main(process.argv);
 
-/* tslint:disable: no-console */
 function main(args: string[]): number {
-    if (args.length < 4) {
-        console.log("Usage: mdgt [provider] [query]");
-        return 1;
-    }
-    const provider = (new Providers("./providers")).find(args[2]);
-    const parser = new Parser(provider);
-    parser.scrape(args[3], (data) => {
-        const fmt = new ConsoleFormatter();
-        console.log(fmt.format(data));
-    });
+    let cmd = new Cmd();
+    cmd
+        .onProviderList(() => {
+            const out = (new OutputterLocator()).get(cmd.outputType);
+            const providers = new Providers("./providers");
+            out.writeList(providers.list(), "Available providers:");
+        })
+        .onParse((providerType, query) => {
+            const providers = new Providers("./providers");
+            const provider = providers.find(providerType);
+            const parser = new Parser(provider);
+            parser.scrape(args[3], (data) => {
+                const fmt = new TextFormatter();
+                const out = (new OutputterLocator()).get(cmd.outputType);
+                out.writeFormatted(fmt.format(data));
+            });
+        })
+        .dispatch(args);
+
     return 0;
 }
