@@ -6,16 +6,16 @@ export interface IOutputter {
 }
 
 export class OutputterLocator {
-    private table = new Map<string, () => IOutputter>();
+    private table = new Map<string, (args: any[]) => IOutputter>();
 
     constructor() {
-        this.table.set("console", () => new ConsoleOutputter());
+        this.table.set("console", (args) => new ConsoleOutputter(args[0], args[1]));
     }
 
-    public get(name: string): IOutputter {
+    public get(name: string, ...args: any[]): IOutputter {
         if (!this.table.has(name))
             throw Error(`Outputter ${name} not found`);
-        return this.table.get(name)();
+        return this.table.get(name)(args);
     }
 }
 
