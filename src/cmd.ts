@@ -7,7 +7,7 @@ export class Cmd {
 
     public outputType: string = "console";
     private providerListFunction: () => void;
-    private parseFunction: (providerType: string, query: string) => void;
+    private parseFunction: (fmt: IFormatter, providerType: string, query: string) => void;
 
     public dispatch(args: string[]): Cmd {
         let cmd = new Cmd();
@@ -15,14 +15,15 @@ export class Cmd {
         program
             .version(Cmd.version)
             .option("-p, --providers", "list available providers and exit")
+            .option("-j, --json", "output in JSON")
             .arguments("<provider> [query]")
             .action((provider, query) => {
-                const opts = <any>program; // alias for easy access of dynamic option properties
-                if (opts.providers)
+                if ((<any>program).providers)
                     this.providerListFunction();
+                const opts = this.handleOpts(<any>program);
                 if (typeof provider === "undefined" || typeof query === "undefined")
                     program.help();
-                this.parseFunction(provider, query);
+                this.parseFunction(opts.formatter, provider, query);
             });
 
         program.parse(args);
@@ -38,8 +39,19 @@ export class Cmd {
         return this;
     }
 
-    public onParse(callback: (providerType: string, query: string) => void) {
+    public onParse(callback: (fmt: IFormatter, providerType: string, query: string) => void) {
         this.parseFunction = callback;
         return this;
+    }
+
+    private handleOpts(opts: any) {
+        let fmt: IFormatter;
+        if (opts.json)
+            fmt = new JsonFormatter();
+        else
+            fmt = new TextFormatter();
+        return {
+            formatter: fmt
+        };
     }
 }

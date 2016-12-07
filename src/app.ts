@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Cmd } from "./cmd";
-import { TextFormatter } from "./formatter";
-import { ConsoleOutputter, OutputterLocator } from "./outputter";
+import { IFormatter } from "./formatter";
+import { OutputterLocator } from "./outputter";
 import { Parser } from "./parser";
 import { Providers } from "./providers";
 
@@ -15,12 +15,11 @@ function main(args: string[]): number {
             const providers = new Providers("./providers");
             out.writeList(providers.list(), "Available providers:");
         })
-        .onParse((providerType, query) => {
+        .onParse((fmt, providerType, query) => {
             const providers = new Providers("./providers");
             const provider = providers.find(providerType);
             const parser = new Parser(provider);
             parser.scrape(args[3], (data) => {
-                const fmt = new TextFormatter();
                 const out = (new OutputterLocator()).get(cmd.outputType);
                 out.writeFormatted(fmt.format(data));
             });
