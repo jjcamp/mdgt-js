@@ -16,7 +16,8 @@ export class Cmd {
             .version(Cmd.version)
             .option("-p, --providers", "list available providers and exit")
             .option("-j, --json", "output in JSON")
-            .arguments("<provider> [query]")
+            .option("--pretty-print", "outputs a formatted table (default)")
+            .arguments("<provider> <query>")
             .action((provider, query) => {
                 if ((<any>program).providers)
                     this.providerListFunction();

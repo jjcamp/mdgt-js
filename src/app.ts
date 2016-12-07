@@ -19,7 +19,7 @@ function main(args: string[]): number {
             const providers = new Providers("./providers");
             const provider = providers.find(providerType);
             const parser = new Parser(provider);
-            parser.scrape(args[3], (data) => {
+            parser.scrape(query, (data) => {
                 const out = (new OutputterLocator()).get(cmd.outputType);
                 out.writeFormatted(fmt.format(data));
             });
