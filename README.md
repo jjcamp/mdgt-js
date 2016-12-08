@@ -4,9 +4,9 @@ mdgt.js
 to the node ecosystem.
 
 Although **mdgt.js** isn't quite usable yet, you can still give it a try
-by running `node . [provider] [query]` from inside its directory. E.g.
-`node . wp Node.js` will retrieve the title and synopsis of the Node.js
-Wikipedia entry.
+by installing with `mdgt install -g`, and running `mdgt [provider] [query]`
+from the project root. E.g. `mdgt wp Node.js` will retrieve the title and
+synopsis of the Node.js Wikipedia entry.
 
 Providers
 ---------

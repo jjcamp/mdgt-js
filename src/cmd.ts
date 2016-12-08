@@ -3,7 +3,7 @@ import * as program from "commander";
 import * as fs from "fs";
 
 export class Cmd {
-    public static version: string = JSON.parse(fs.readFileSync("package.json").toString()).version;
+    public static version: string = "0.0.0";
 
     public outputType: string = "console";
     private providerListFunction: () => void;
